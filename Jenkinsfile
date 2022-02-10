@@ -1,10 +1,13 @@
 pipeline {
     agent any
-
+    environment{
+    NEW_VERSION = '1.3.0'
+    }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
+                echo "building version "$NEW_VERSION}"
             }
         }
         stage('Test') {
@@ -15,7 +18,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh git clone https://github.com/CodeWithBanchi/Vehireg_API  C:\Users\Banchi\Desktop\editys\ltrm
             }
         }
     }
