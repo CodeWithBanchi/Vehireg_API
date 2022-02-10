@@ -2,7 +2,11 @@ pipeline {
     agent any
     environment{
     NEW_VERSION = '1.3.0'
-    SERVER_CREDENTIALS = credentials('server')
+    }
+    parameters{
+        choise(Name:'version' , oices:[1.1.0','1.1.1','1.1.2'] , description:'')
+        booleanParam(Name:'executeTests',defaultValue:true,description:'')
+    
     }
     stages {
         stage('Build') {
@@ -12,6 +16,12 @@ pipeline {
             }
         }
         stage('Test1') {
+            when{
+                expression{
+                params.executeTests
+                }
+            
+            }
             steps {
                 echo 'Testing..'
             }
@@ -24,8 +34,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                echo "deploying from ${SERVER_CREDENTIALS}"
-                sh "${SERVER_CREDENTIALS}"
+                echo "Deploying version from ${params.VERSION}"
+           
             }
         }
     }
