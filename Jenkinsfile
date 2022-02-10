@@ -3,10 +3,16 @@ pipeline {
     
     stages {
         stage("build") {
-        
-         steps{
-          echo 'building the application'
-         }
+        stage('Deploy') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
+            steps {
+                sh 'make publish'
+            }
+        }
         }
         
           stage("test") {
