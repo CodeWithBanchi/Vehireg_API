@@ -4,7 +4,7 @@ pipeline {
     NEW_VERSION = '1.3.0'
     }
     parameters{
-        choise(Name:'VERSION' , oices:[1.1.0','1.1.1','1.1.2'] , description:'')
+        choise(Name:'VERSION' , oices:['1.1.0','1.1.1','1.1.2'] , description:'')
         booleanParam(Name:'executeTests',defaultValue:true,description:'')
     
     }
